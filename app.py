@@ -1,6 +1,10 @@
 from flask import Flask, render_template, request, session, redirect, send_from_directory, abort
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
+from database import create_database
+
+app = Flask(__name__)
+create_database()
 import sqlite3
 import os
 
