@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustVault Registration</title>
+</head>
+<body style="font-family: Arial; background:#eef2ff; padding:40px;">
+    <h1>Create TrustVault Account</h1>
+
+    <form method="POST" action="/register">
+        <input name="username" placeholder="Username" required>
+        <br><br>
+
+        <input type="password" name="password"
+               placeholder="Password" required>
+        <br><br>
+
+        <label for="role">Choose your role:</label>
+        <select name="role" id="role">
+            <option value="Owner">Owner</option>
+            <option value="Viewer">Viewer</option>
+        </select>
+        <br><br>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <p><a href="/">Back to Login</a></p>
+</body>
+</html>
