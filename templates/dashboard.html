@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustVault Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1, h2, h3 {
+            color: #1d4ed8;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: white;
+            margin: 12px 0;
+            padding: 18px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px #00000010;
+        }
+
+        a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        input {
+            padding: 9px;
+            margin: 6px 4px;
+            border: 1px solid #cbd5e1;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 9px 14px;
+            margin: 5px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+<body style="font-family:Arial; margin:40px; background:#eef2ff;">
+    <h1>TrustVault Dashboard</h1>
+    <h3>Secure Document Sharing</h3>
+
+    <p>Welcome, {{ username }}!</p>
+    <p>Your role: {{ role }}</p>
+
+    {% if role == "Owner" %}
+    <h3>Upload a Document</h3>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="document" required>
+        <button type="submit">Upload Document</button>
+    </form>
+    {% endif %}
+
+    
+<h3>Your Documents</h3>
+
+<ul>
+    {% for document in documents %}
+    <li>
+        <a href="/document/{{ document[0] }}">{{ document[1] }}</a>
+
+        {% if role == "Owner" %}
+        <form action="/share" method="POST">
+            <input type="hidden" name="document_id"
+                   value="{{ document[0] }}">
+
+            <input type="text" name="shared_with"
+                   placeholder="Username to share with" required>
+
+            <button type="submit">Share</button>
+        </form>
+        
+<form action="/revoke" method="POST">
+    <input type="hidden" name="document_id" value="{{ document[0] }}">
+
+    <input type="text" name="username"
+           placeholder="Viewer username" required>
+
+    <button type="submit">Revoke Access</button>
+</form>
+
+        {% endif %}
+    </li>
+    {% else %}
+    <li>No documents uploaded yet.</li>
+    {% endfor %}
+</ul>
+
+
+    <a href="/logout">Logout</a>
+</body>
+</html>
