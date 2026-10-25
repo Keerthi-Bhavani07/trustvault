@@ -5,6 +5,7 @@ import sqlite3
 import os
 
 app = Flask(__name__)
+create_database()
 
 from werkzeug.security import generate_password_hash
 
