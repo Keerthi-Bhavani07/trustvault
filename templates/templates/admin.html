@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TrustVault Admin</title>
+</head>
+<body>
+    <h1>TrustVault - Activity Dashboard</h1>
+
+    <h2>Document Activity Logs</h2>
+
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>Username</th>
+            <th>Action</th>
+            <th>Document ID</th>
+            <th>Timestamp</th>
+        </tr>
+
+        {% for log in logs %}
+        <tr>
+            <td>{{ log[0] }}</td>
+            <td>{{ log[1] }}</td>
+            <td>{{ log[2] }}</td>
+            <td>{{ log[3] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="/dashboard">Back to Dashboard</a>
+    <br><br>
+    <a href="/logout">Logout</a>
+</body>
+</html>
